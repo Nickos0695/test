@@ -36,7 +36,7 @@ func Handlers() *gin.Engine {
         v1Notes.GET(":id", GetNote)
         v1Notes.PUT(":id", EditNote)
         v1Notes.DELETE(":id", DeleteNote)
-		v1Notes.DELETE("", DeleteNotes) // POST
+		v1Notes.DELETE("", DeleteNotes)
     }
 
     return r
@@ -44,8 +44,16 @@ func Handlers() *gin.Engine {
 
 // Activation du CORS
 func Cors() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Writer.Header().Add("Access-Control-Allow-Origin", "*")
-		c.Next()
-	}
+    return func(c *gin.Context) {
+        c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+        c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+        c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
+
+        if c.Request.Method == "OPTIONS" {
+            c.AbortWithStatus(204)
+            return
+        }
+
+        c.Next()
+    }
 }
