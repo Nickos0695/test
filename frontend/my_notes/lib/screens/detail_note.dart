@@ -5,7 +5,7 @@ import 'package:my_notes/models/note_model.dart';
 import 'package:my_notes/screens/home_screen.dart';
 
 class DetailNote extends StatefulWidget {
-  const DetailNote({Key? key, required this.note}) : super(key: key);
+  const DetailNote({super.key, required this.note});
 
   final Note note;
 
@@ -15,14 +15,14 @@ class DetailNote extends StatefulWidget {
 
 class _DetailNoteState extends State<DetailNote> {
   late TextEditingController titleController;
-  late TextEditingController contentController;
+  late TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
     // Initialisez les contrôleurs avec les valeurs actuelles de la note
     titleController = TextEditingController(text: widget.note.title);
-    contentController = TextEditingController(text: widget.note.text);
+    textController = TextEditingController(text: widget.note.text);
   }
 
   Future<void> updateNote() async {
@@ -30,7 +30,7 @@ class _DetailNoteState extends State<DetailNote> {
 
     final Map<String, dynamic> data = {
       'title': titleController.text,
-      'text': contentController.text,
+      'text': textController.text,
     };
 
     final response = await http.put(
@@ -58,7 +58,6 @@ class _DetailNoteState extends State<DetailNote> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: titleController,
@@ -68,17 +67,20 @@ class _DetailNoteState extends State<DetailNote> {
               ),
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             TextField(
-              controller: contentController,
+              controller: textController,
               decoration: const InputDecoration(labelText: 'Contenu de la note'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+              ),
               onPressed: () {
                 updateNote();
               },
-              child: const Text('Sauvegarder les modifications'),
+              child: const Text('Sauvegarder les modifications', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

@@ -45,7 +45,7 @@ class _CreateNoteState extends State<CreateNote> {
       appBar: AppBar(
         title: const Text('Créer une note'),
       ),
-      body: Padding(
+       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -64,10 +64,13 @@ class _CreateNoteState extends State<CreateNote> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+              ),
               onPressed: () {
                 saveNote();
               },
-              child: const Text('Enregistrer la note'),
+              child: const Text('Enregistrer la note', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
