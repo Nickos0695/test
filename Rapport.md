@@ -1,24 +1,24 @@
 # test
 
 # Docker
-## Installation
-### Prérequis
+## Prérequis
 - [Docker](https://docs.docker.com/install/) version 19.03.5 ou supérieur
 - [Docker-compose](https://docs.docker.com/compose/install/) version 1.25.0 ou supérieur
 
-### Installation
+## Installation
 - Cloner le projet
 - Se placer dans le dossier test
 - Lancer la commande `docker-compose up -d`
+
+## Utilisation
 - Le serveur est accessible sur le port 3567
 - L'app est accessible sur le port 80
 
 # Backend
-## Installation
-### Prérequis
+## Prérequis
 - [Go](https://golang.org/dl/) version 1.19 ou supérieur
 
-### Installation
+## Installation
 - Cloner le projet dans le dossier test de votre GOPATH
 - Se placer dans le dossier backend
 - Lancer la commande `go run .`
@@ -58,11 +58,11 @@
 ]
 ```
 
-# frontend
+# Frontend
 ## Prérequis
 - [Flutter](https://flutter.dev/docs/get-started/install) version 1.12.13 ou supérieur
 
-### Installation
+## Installation
 - Cloner le projet dans le dossier test de votre GOPATH
 - Se placer dans le dossier frontend
 - Lancer la commande `flutter run -d chrome`
@@ -72,4 +72,3 @@
 - Créer une note
 - Modifier une note
 - Supprimer une note
-```
