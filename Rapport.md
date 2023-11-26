@@ -1,5 +1,10 @@
 # test
 
+# Choix techniques
+- Docker pour la mise en place de l'environnement de développement ainsi que pour le déploiement
+- Go pour le backend - API REST - avec le framework [Gin] qui facilite la création de l'API
+- Flutter pour le frontend - Application web
+
 # Sommaire
 - [Docker](#docker)
     - [Prérequis](#prérequis)
