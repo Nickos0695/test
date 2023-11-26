@@ -15,4 +15,4 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports: 
-      - 3567:5000
+      - 3567:3567

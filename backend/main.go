@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-    err := http.ListenAndServe(":5000", api.Handlers())
+    err := http.ListenAndServe(":3567", api.Handlers())
 
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
