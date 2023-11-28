@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_notes/models/note_model.dart';
 import 'package:my_notes/screens/create_note.dart';
 import 'package:my_notes/screens/detail_note.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -62,15 +63,50 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
             trailing: IconButton(
               icon: const Icon(Icons.delete, color: Colors.white),
-              onPressed: () async {
-                final response = await http.delete(Uri.parse('http://localhost:3567/api/v1/notes/${notes[index].id}'));
-                if (response.statusCode == 200) {
-                  fetchNotes();
-                }
-                else {
-                  print('Échec de la requête DELETE : ${response.statusCode}');
-                }
-              },
+              onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Voulez-vous vraiment supprimer cette note ?'),
+                  titleTextStyle: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Annuler', style: TextStyle(color: Colors.black)),
+                    ),
+                    TextButton(
+                  onPressed: () async {
+                    final response = await http.delete(Uri.parse('http://localhost:3567/api/v1/notes/${notes[index].id}'));
+                    if (response.statusCode == 200) {
+                      fetchNotes();
+                      Navigator.pop(context, 'OK');
+                      Fluttertoast.showToast(
+                        msg: "Note supprimé avec succès",
+                        gravity: ToastGravity.BOTTOM_LEFT,
+                        timeInSecForIosWeb: 2,
+                        webBgColor: "green",
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                      );
+                    }
+                    else {
+                      print('Échec de la requête DELETE : ${response.statusCode}');
+                      Fluttertoast.showToast(
+                        msg: "Erreur lors de la suppression de la note",
+                        gravity: ToastGravity.BOTTOM_LEFT,
+                        timeInSecForIosWeb: 2,
+                        webBgColor: "red",
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                      );
+                    }
+                  },                      
+                  child: const Text('Oui', style: TextStyle(color: Colors.red)),
+                    ),
+                  ],
+                ),
+              ),
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailNote(note: notes[index])));

@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:my_notes/models/note_model.dart';
 import 'package:my_notes/screens/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DetailNote extends StatefulWidget {
   const DetailNote({super.key, required this.note});
@@ -44,8 +45,26 @@ class _DetailNoteState extends State<DetailNote> {
     if (response.statusCode == 200) {
       print('Note mise à jour avec succès');
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const HomeScreen()));
+      Fluttertoast.showToast(
+        msg: "Note mise à jour avec succès",
+        gravity: ToastGravity.BOTTOM_LEFT,
+        timeInSecForIosWeb: 2,
+        webBgColor: "green",
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+      );
     } else {
       print('Échec de la requête PUT : ${response.statusCode}');
+      Fluttertoast.showToast(
+        msg: "Erreur lors de la mise à jour de la note",
+        gravity: ToastGravity.BOTTOM_LEFT,
+        timeInSecForIosWeb: 2,
+        webBgColor: "red",
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+      );
     }
   }
 

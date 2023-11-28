@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:my_notes/screens/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateNote extends StatefulWidget {
   const CreateNote({super.key});
@@ -34,8 +34,26 @@ class _CreateNoteState extends State<CreateNote> {
     if (response.statusCode == 201) {
       print('Note créée avec succès');
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const HomeScreen()));
+      Fluttertoast.showToast(
+        msg: "Note créée avec succès",
+        gravity: ToastGravity.BOTTOM_LEFT,
+        timeInSecForIosWeb: 2,
+        webBgColor: "green",
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+      );
     } else {
       print('Échec de la requête POST : ${response.statusCode}');
+      Fluttertoast.showToast(
+        msg: "Erreur lors de la création de la note",
+        gravity: ToastGravity.BOTTOM_LEFT,
+        timeInSecForIosWeb: 2,
+        webBgColor: "red",
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+      );
     }
   }
 
