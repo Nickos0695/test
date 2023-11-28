@@ -43,7 +43,8 @@ class _CreateNoteState extends State<CreateNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Créer une note'),
+        title: const Text('Créer une note', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.blue,
       ),
        body: Padding(
         padding: const EdgeInsets.all(16.0),
